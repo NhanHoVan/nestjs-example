@@ -4,12 +4,14 @@
 
 Follow the steps as instructed by Francesco Ciulla: [TypeScript CRUD Rest API, using Nest.js, TypeORM, Postgres, Docker and Docker Compose](https://dev.to/francescoxx/typescript-crud-rest-api-using-nestjs-typeorm-postgres-docker-and-docker-compose-33al)
 
-### Create a CRUD Rest API in Typescript, using:
+### Create a Manage User project, using:
 - NestJS (NodeJS framework)
+- Typescript
 - TypeORM (ORM: Object Relational Mapper)
 - Postgres (relational database)
 - Docker (for containerization)
 - Docker Compose
+- Firebase Auth
 
 ## Requirements:
 - Node installed (I'm using v16)
@@ -21,6 +23,22 @@ Follow the steps as instructed by Francesco Ciulla: [TypeScript CRUD Rest API, u
 
 ```bash
 $ npm install
+```
+
+## ENV
+
+```bash
+API_PORT=3000
+PG_PORT=5432
+PG_HOST=localhost
+PG_USER=postgres
+PG_PASSWORD=postgres
+PG_DB=postgres
+DB_TYPE=postgres
+FIREBASE_PROJECT_ID=
+FIREBASE_PRIVATE_KEY=
+FIREBASE_CLIENT_EMAIL=
+NODE_ENV=
 ```
 
 ## Run the Postgres service
@@ -45,6 +63,16 @@ $ docker compose build
 ```bash
 # Run the Nest app service
 $ docker compose up
+```
+
+## Migration
+
+```bash
+# Create a new migration for TypeORM
+$ docker-compose exec nestapp npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate src/db/migration/AddUsersAndOrganizationTable -d src/db/ormconfig.ts
+
+# Run migration
+$ docker-compose exec nestapp npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/db/ormconfig.ts
 ```
 
 ## Support

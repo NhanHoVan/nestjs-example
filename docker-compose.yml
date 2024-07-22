@@ -5,7 +5,7 @@ services:
     image: nestapp:1.0.0
     build: .
     ports:
-      - '3000:3000'
+      - '${API_PORT}:${API_PORT}'
     environment:
       - DB_TYPE=postgres
       - PG_USER=${PG_USER}
@@ -13,8 +13,13 @@ services:
       - PG_DB=${PG_DB}
       - PG_PORT=${PG_PORT}
       - PG_HOST=db
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+      - FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
     depends_on:
       - db
+    volumes:
+      - .:/app
   db:
     container_name: db
     image: postgres:12
@@ -23,7 +28,7 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: ${PG_DB}
     ports:
-      - '5432:5432'
+      - '${PG_PORT}:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:
