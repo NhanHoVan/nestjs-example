@@ -2,7 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import * as admin from 'firebase-admin';
-import { HttpExceptionFilter } from './exception/http-exception.filter';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,8 +22,10 @@ async function bootstrap() {
     credential: admin.credential.cert(serviceAccount),
   });
 
-  app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
+
+  app.enableCors();
 
   await app.listen(configService.get<string>('API_PORT') || 3000);
 }
