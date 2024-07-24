@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import * as admin from 'firebase-admin';
+import { HttpExceptionFilter } from './exception/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,6 +22,7 @@ async function bootstrap() {
   });
 
   app.enableCors();
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(configService.get<string>('API_PORT') || 3000);
 }
