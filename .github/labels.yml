@@ -1,0 +1,28 @@
+# labels.yml
+
+labels:
+  - name: module:users
+    color: 00CC33
+    description:
+
+  - name: module:organizations
+    color: 0099FF
+    description:
+
+  - name: module:tasks
+    color: FF6666
+    description:
+
+  - name: config:workflows
+    color: 0033FF
+    description:
+
+repos:
+  - name: NhanHoVan/nestjs-example
+    labels:
+      - module:users
+      - module:organizations
+      - module:tasks
+      - config:workflows
+
+# Add more labels as needed

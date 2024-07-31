@@ -1,0 +1,28 @@
+name: Sync labels
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/labels.yml
+
+jobs:
+  sync:
+    name: Run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+
+      - name: Install GitHub Label Sync
+        run: npm install -g github-label-sync
+
+      - name: Sync labels
+        run: github-label-sync --access-token ${{ secrets.GITHUB_TOKEN }} --labels .github/labels.yml --repo ${{ github.repository }}

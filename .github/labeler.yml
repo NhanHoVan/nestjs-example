@@ -1,0 +1,19 @@
+# labeler.yml
+
+module:users:
+  - changed-files:
+    - any-glob-to-any-file: '/src/users/*'
+
+module:organizations:
+  - changed-files:
+    - any-glob-to-any-file: '/src/organizations/*'
+
+module:tasks:
+  - changed-files:
+    - any-glob-to-any-file: '/src/task/*'
+
+config:workflows:
+  - changed-files:
+    - any-glob-to-any-file: '.github/*'
+
+# Add more rules as needed
