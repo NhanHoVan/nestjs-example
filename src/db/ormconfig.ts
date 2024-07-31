@@ -1,14 +1,17 @@
 import { DataSource } from 'typeorm';
 import { User } from './entities/user.entity';
 import { Organization } from './entities/organization.entity';
+import { ConfigService } from '@nestjs/config';
+
+const configService = new ConfigService();
 
 const dataSource = new DataSource({
-  type: 'postgres',
-  host: process.env.PG_HOST,
-  port: parseInt(process.env.PG_PORT, 5432),
-  username: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  database: process.env.PG_DB,
+  type: configService.get<string>('DB_TYPE') as any,
+  host: configService.get<string>('PG_HOST'),
+  port: parseInt(configService.get<string>('PG_PORT'), 10),
+  username: configService.get<string>('PG_USER'),
+  password: configService.get<string>('PG_PASSWORD'),
+  database: configService.get<string>('PG_DB'),
   entities: [User, Organization],
   migrations: ['src/db/migration/**/*.ts'],
   synchronize: false,

@@ -30,10 +30,10 @@ $ npm install
 ```bash
 API_PORT=3000
 PG_PORT=5432
-PG_HOST=localhost
-PG_USER=postgres
-PG_PASSWORD=postgres
-PG_DB=postgres
+PG_HOST=database
+PG_USER=user
+PG_PASSWORD=password
+PG_DB=nestjs
 DB_TYPE=postgres
 FIREBASE_PROJECT_ID=
 FIREBASE_PRIVATE_KEY=
@@ -49,6 +49,13 @@ $ docker compose up -d db
 
 # Check if the service is running
 $ docker ps -a
+```
+
+## Build the Nest app
+
+```bash
+# Make sure all files are built.
+$ npm run build
 ```
 
 ## Build the Nest app image

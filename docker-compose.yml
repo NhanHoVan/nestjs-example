@@ -5,23 +5,27 @@ services:
     image: nestapp:1.0.0
     build: .
     ports:
-      - '${API_PORT}:${API_PORT}'
+      - '${API_PORT}:3000'
     environment:
-      - DB_TYPE=postgres
+      - DB_TYPE=${DB_TYPE}
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
       - PG_DB=${PG_DB}
       - PG_PORT=${PG_PORT}
-      - PG_HOST=db
+      - PG_HOST=${PG_HOST}
       - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
       - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
       - FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
     depends_on:
-      - db
+      - database
     volumes:
       - .:/app
-  db:
-    container_name: db
+    command: npm run start:prod
+    networks:
+      - nestjs_network
+
+  database:
+    container_name: database
     image: postgres:12
     environment:
       POSTGRES_USER: ${PG_USER}
@@ -31,5 +35,12 @@ services:
       - '${PG_PORT}:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - nestjs_network
+
 volumes:
   pgdata: {}
+
+networks:
+  nestjs_network:
+    driver: bridge

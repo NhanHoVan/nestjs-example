@@ -26,7 +26,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   app.enableCors();
-
+  app.setGlobalPrefix('api');
   await app.listen(configService.get<string>('API_PORT') || 3000);
 }
 bootstrap();
