@@ -9,8 +9,12 @@ labels:
     color: 0099FF
     description:
 
-  - name: module:tasks
+  - name: module:projects
     color: FF6666
+    description:
+
+  - name: module:tasks
+    color: FF3300
     description:
 
   - name: config:workflows
@@ -22,6 +26,7 @@ repos:
     labels:
       - module:users
       - module:organizations
+      - module:projects
       - module:tasks
       - config:workflows
 
