@@ -1,7 +1,9 @@
 name: Add labels
 
 on:
-  pull_request_target:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
