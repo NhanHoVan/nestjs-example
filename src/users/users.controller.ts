@@ -10,22 +10,28 @@ import {
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { User } from '../db/entities/user.entity';
+import { FindByIdDto } from 'src/shared/dto/validator.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { systemUserId } from 'src/constants/utils';
 
 @Controller('users')
+// @UseGuards(RolesGuard)
+// @Roles(Role.MANAGER_ROLE)
 export class UsersController {
   constructor(private readonly usersService: UserService) {}
 
-  //get all users
+  //fetch all users
   @Get()
-  async findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  async fetchAllUser(): Promise<User[]> {
+    return await this.usersService.fetchAllUser();
   }
 
   //get user by id
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
-    const user = await this.usersService.findOne(id);
-    if (!user) {
+  async getUserById(@Param() params: FindByIdDto): Promise<User> {
+    const user = await this.usersService.findUserById(params.id);
+    if (user === null) {
       throw new NotFoundException('User does not exist!');
     } else {
       return user;
@@ -34,24 +40,40 @@ export class UsersController {
 
   //create user
   @Post()
-  async create(@Body() user: User): Promise<User> {
-    return this.usersService.create(user);
+  async createUser(
+    @Body() user: CreateUserDto,
+    // @Req() req: Request,
+  ): Promise<User> {
+    // const currentAdminId = req['currentAdminId']
+    //   ? req['currentAdminId']
+    //   : systemUserId;
+    return this.usersService.create(user, systemUserId);
   }
 
   //update user
   @Put(':id')
-  async update(@Param('id') id: string, @Body() user: User): Promise<any> {
-    return this.usersService.update(id, user);
+  async updateUser(
+    @Param() params: FindByIdDto,
+    @Body() user: UpdateUserDto,
+    // @Req() req: Request,
+  ): Promise<any> {
+    // const currentAdminId = req['currentAdminId']
+    //   ? req['currentAdminId']
+    //   : systemUserId;
+    const checkUserId = await this.usersService.findUserById(params.id);
+    if (checkUserId === null) {
+      throw new NotFoundException('User does not exist!');
+    }
+    return this.usersService.update(params.id, user, systemUserId);
   }
 
   //delete user
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<any> {
-    //handle error if user does not exist
-    const user = await this.usersService.findOne(id);
-    if (!user) {
+  async deleteUserById(@Param() params: FindByIdDto): Promise<any> {
+    const user = await this.usersService.findUserById(params.id);
+    if (user === null) {
       throw new NotFoundException('User does not exist!');
     }
-    return this.usersService.delete(id);
+    return this.usersService.delete(params.id);
   }
 }
