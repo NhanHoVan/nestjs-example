@@ -2,22 +2,22 @@
 
 module:users:
   - changed-files:
-    - any-glob-to-any-file: '/src/users/*'
+    - any-glob-to-any-file: 'src/users/**/*'
 
 module:organizations:
   - changed-files:
-    - any-glob-to-any-file: '/src/organizations/*'
+    - any-glob-to-any-file: 'src/organizations/**/*'
 
 module:projects:
   - changed-files:
-    - any-glob-to-any-file: '/src/projects/*'
+    - any-glob-to-any-file: 'src/projects/**/*'
 
 module:tasks:
   - changed-files:
-    - any-glob-to-any-file: '/src/tasks/*'
+    - any-glob-to-any-file: 'src/tasks/**/*'
 
 config:workflows:
   - changed-files:
-    - any-glob-to-any-file: '.github/*'
+    - any-glob-to-any-file: '.github/**/*'
 
 # Add more rules as needed
