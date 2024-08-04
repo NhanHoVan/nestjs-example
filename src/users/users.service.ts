@@ -40,7 +40,7 @@ export class UserService {
       email: user.email,
       organizationId: user.organizationId,
       avatarUrl: user.avatarUrl ? user.avatarUrl : null,
-      status: user.status ? user.status : Status.INVITED_STATUS,
+      status: Status.INVITED_STATUS,
       role: user.role ? user.role : Role.MEMBER_ROLE,
       createdBy: currentAdminId,
       updatedBy: currentAdminId,
