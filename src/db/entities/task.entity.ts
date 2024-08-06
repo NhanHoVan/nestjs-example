@@ -40,8 +40,11 @@ export class Task {
   @Column({ type: 'int', name: 'story_points', nullable: true })
   storyPoints: number;
 
-  @Column({ name: 'assignee', type: 'uuid', nullable: true })
-  assignee: string;
+  @Column({ name: 'assignee_id', type: 'uuid', nullable: true })
+  assigneeId: string;
+
+  @Column({ name: 'sprint', length: 100, nullable: true })
+  sprint: string;
 
   @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
   createdAt: Date;
