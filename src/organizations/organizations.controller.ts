@@ -11,6 +11,7 @@ import { OrganizationsService } from './organizations.service';
 import { Organization } from 'src/db/entities/organization.entity';
 import { FindByIdDto } from 'src/shared/dto/validator.dto';
 import { systemUserId } from 'src/constants/utils';
+import { CreateOrganizationDto } from './dto/create-organization.dto';
 
 @Controller('organizations')
 export class OrganizationsController {
@@ -40,7 +41,7 @@ export class OrganizationsController {
   //create organization
   @Post()
   async createOrganization(
-    @Body() organization: Organization,
+    @Body() organization: CreateOrganizationDto,
     // @Req() req: Request,
   ): Promise<Organization> {
     // const currentAdminId = req['currentAdminId']

@@ -1,4 +1,3 @@
-import { Status } from 'src/constants/status.enum';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -20,13 +19,6 @@ export class Organization {
 
   @Column({ name: 'address', length: 255, nullable: true })
   address: string;
-
-  @Column({
-    type: 'enum',
-    enum: Status,
-    default: Status.ACTIVE_STATUS,
-  })
-  status: Status;
 
   @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
   createdAt: Date;

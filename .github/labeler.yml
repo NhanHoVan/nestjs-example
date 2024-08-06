@@ -12,6 +12,10 @@ module:projects:
   - changed-files:
     - any-glob-to-any-file: 'src/projects/**/*'
 
+module:tickets:
+  - changed-files:
+    - any-glob-to-any-file: 'src/tickets/**/*'
+
 module:tasks:
   - changed-files:
     - any-glob-to-any-file: 'src/tasks/**/*'

@@ -2,23 +2,27 @@
 
 labels:
   - name: module:users
-    color: 00CC33
+    color: #00CC33
     description:
 
   - name: module:organizations
-    color: 0099FF
+    color: #0099FF
     description:
 
   - name: module:projects
-    color: FF6666
+    color: #FF6666
+    description:
+
+  - name: module:tickets
+    color: #387F39
     description:
 
   - name: module:tasks
-    color: FF3300
+    color: #FF3300
     description:
 
   - name: config:workflows
-    color: 0033FF
+    color: #0033FF
     description:
 
 repos:
@@ -27,6 +31,7 @@ repos:
       - module:users
       - module:organizations
       - module:projects
+      - module:tickets
       - module:tasks
       - config:workflows
 

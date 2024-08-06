@@ -1,14 +1,22 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  IsUUID,
+  Length,
+} from 'class-validator';
 import { Role } from 'src/constants/role.enum';
-import { Status } from 'src/constants/status.enum';
 
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
+  @Length(1, 60)
   name: string;
 
   @IsNotEmpty()
   @IsEmail()
+  @Length(1, 254)
   email: string;
 
   @IsNotEmpty()
@@ -17,10 +25,6 @@ export class CreateUserDto {
 
   @IsString()
   avatarUrl: string;
-
-  @IsNotEmpty()
-  @IsEnum(Status)
-  status: Status;
 
   @IsNotEmpty()
   @IsEnum(Role)
